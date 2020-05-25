@@ -5,13 +5,16 @@
  */
 package es.albarregas.controllers;
 
+import es.albarregas.beans.Elecciones;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -20,45 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "eleccion", urlPatterns = {"/eleccion"})
 public class eleccion extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet eleccion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet eleccion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doPost(request, response);
     }
 
     /**
@@ -72,17 +40,39 @@ public class eleccion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Elecciones eleccion=new Elecciones();
+        
+        System.out.println(request.getHeader("referer"));
+        
+        Enumeration<String> e=request.getParameterNames();
+        String txt,url=null;
+        while(e.hasMoreElements()){
+            txt=e.nextElement();
+            if(txt.equals("edificio")){
+                eleccion.setEdificio(true);   
+            }else if(txt.equals("contenido")){
+                eleccion.setContenido(true);                
+            }
+        }
+        if(eleccion.getEdificio()==true){
+            if(request.getParameter("jsp").equals("jstl")){
+                url="JSP/JSPLE/edificio.jsp";
+            }else{
+                url="JSP/JSP/edificio.jsp";
+            }
+        }else{
+            if(request.getParameter("jsp").equals("jstl")){
+                url="JSP/JSPLE/contenido.jsp";
+            }else{
+                url="JSP/JSP/contenido.jsp";
+            }
+        }
+        
+        HttpSession sesion=request.getSession();
+        sesion.setAttribute("eleccion", eleccion);
+        
+        response.sendRedirect(url);
+        
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

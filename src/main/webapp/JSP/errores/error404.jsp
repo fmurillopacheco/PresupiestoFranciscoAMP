@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@include file="/INC/metas.inc"%>
+        <%@include file="../../INC/metas.inc"%>
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/error404.css" />
         <title>404 P&aacute;gina no encontrada...</title>
     </head>
