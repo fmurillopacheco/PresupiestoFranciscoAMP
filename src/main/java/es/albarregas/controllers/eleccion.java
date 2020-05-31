@@ -40,6 +40,7 @@ public class eleccion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         Elecciones eleccion=new Elecciones();
         
         System.out.println(request.getHeader("referer"));
@@ -55,16 +56,16 @@ public class eleccion extends HttpServlet {
             }
         }
         if(eleccion.getEdificio()==true){
-            if(request.getParameter("jsp").equals("jstl")){
+            if(request.getParameter("jsp").equals("jsple")){
                 url="JSP/JSPLE/edificio.jsp";
             }else{
                 url="JSP/JSP/edificio.jsp";
             }
         }else{
-            if(request.getParameter("jsp").equals("jstl")){
-                url="JSP/JSPLE/contenido.jsp";
+            if(request.getParameter("jsp").equals("jple")){
+                url="../JSP/JSPLE//contenido.jsp";
             }else{
-                url="JSP/JSP/contenido.jsp";
+                url="../JSP/JSP/contenido.jsp";
             }
         }
         

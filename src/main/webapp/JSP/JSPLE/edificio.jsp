@@ -10,11 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="../../CSS/presupuestoStyle.css"/>
-        <jsp:include page= "../../INC/metas.inc"/>
+        <%@include file="../../INC/metas.inc" %>
         <title>Gestor&iacute;a de Seguros NORMAS - Edificios - Lenguaje de Expresiones v1.</title>
     </head>
     <body>
-    <jsp:include page="../../INC/cabecera.inc"/>
+    <%@include file="../../INC/cabecera.inc" %>
 
         <div id="principal">
             <form action="../../edificio" method="post">
@@ -75,6 +75,6 @@
             </form>
         </div>
 
-        <jsp:include page="../../INC/piePagina.inc"/>
+        <%@include file="../../INC/piePagina.inc"%>
     </body>
 </html>

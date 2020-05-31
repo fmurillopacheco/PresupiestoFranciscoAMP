@@ -61,13 +61,13 @@ public class edificio extends HttpServlet {
         
         Elecciones ele=(Elecciones)sesion.getAttribute("eleccion");
         if(ele.getContenido()){
-            if(request.getParameter("jsp").equals("jstl")){
+            if(request.getParameter("jsp").equals("jsple")){
                 url="JSP/JSPLE/contenido.jsp";
             }else{
                 url="JSP/JSPE/contenido.jsp";
             }
         }else{
-            if(request.getParameter("jsp").equals("jstl")){
+            if(request.getParameter("jsp").equals("jsple")){
                 url="JSP/JSPLE/visualizar.jsp";
             }else{
                 url="JSP/JSP/visualizar.jsp";

@@ -57,9 +57,9 @@ public class contenido extends HttpServlet {
         sesion.setAttribute("contenido", con);
         
         if(request.getParameter("jsp").equals("jstl")){
-            url="JSP/JSPLE/visualizar.jsp";
+            url="JSP/JSPLE/verCouta.jsp";
         }else{
-            url="JSP/JSP/visualizar.jsp";
+            url="JSP/JSP/verCuota.jsp";
         }
         request.getRequestDispatcher(url).forward(request, response);
         

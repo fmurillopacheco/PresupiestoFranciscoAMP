@@ -18,7 +18,7 @@
 
         <div id="principal">
 
-            <form action="<%=request.getContextPath()%>/Edificio" method="post">
+            <form action="../../edificio" method="post">
 
 
                 <h1>Detalle de la póliza de edificios</h1>
@@ -74,6 +74,7 @@
                     </tr>
                 </table>
                 <br><br>
+                <input type="hidden" name="jsp" value="jsp"/>
                 <button type="submit" name="enviar" value="Enviar"/>Enviar
 
 

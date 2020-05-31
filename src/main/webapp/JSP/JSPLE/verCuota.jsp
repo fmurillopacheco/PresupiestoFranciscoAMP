@@ -3,7 +3,8 @@
     Created on : 25-may-2020, 19:57:20
     Author     : Francisco_Antonio
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="es.albarregas.beans.Contenidos"%>
 <%@page import="es.albarregas.beans.Edificios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,107 +12,53 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="../../CSS/presupuestoStyle.css"/>
+        <link rel="stylesheet" href="../../CSS/presupuestoStyleLe.css"/>
         <jsp:include page= "../../INC/metas.inc"/>
         <title>Gestor&iacute;a de Seguros NORMAS - Cuota - Lenguaje de Expresiones v1.</title>
     </head>
 
-        <%
 
-        HttpSession sesion = request.getSession();
-        Edificios edificio = (Edificios) sesion.getAttribute("edificio");
-        Contenidos contenido = (Contenidos) request.getAttribute("contenido");
-        String mh;
-        String siOno; 
-        String franquicia; 
-        double total = 0; 
-    %>
     <body>
         <jsp:include page="../../INC/cabecera.inc"/>
-        <div id="principal">
-            <%
-                if (edificio != null) {
-                    total = total + edificio.getPrima();
-            %>
-            <h1>Seguro de edificio</h1>
-            <%-- A TODAS VISTAS ESTO ES <ul><li>...</li></ul> --%>
-            <p>- Tipo de edificio: ${edificio.tipo}</p>
-            <p>- Número de habitaciones: ${edificio.habitaciones}</p>
-            <p>- Fecha de construcción: ${edificio.fecha}</p>
-            <%
-                if (edificio.getFecha().startsWith("mad")) {
-                    mh = "Madera";
-                } else {
-                    mh = "Hormigón";
-                }
-
-            %>
-            <p>- Tipo de construcción: ${edificio.material}</p>
-            <p>- Valor estimado del mercado: ${edificio.valor}€</p>
-            <%
-                if (contenido != null) {
-            %>
-            <p><small>(Total del seguro del edificio: ${edificio.prima}€)</small></p>
-
-            <%
-                }
-            %>
-            <br/>
-            <%
-                }
-                //Se añade una línea separadora <hr/> si están los dos seguros seleccionados
-                if (edificio != null && contenido != null) {
-            %>
-            <hr/>
-            <%
-                }
-            %>
-
-            <%
-                if (contenido != null) {
-                    total = total + contenido.getPrima();
-            %>
-            <h1>Seguro de contenido</h1>
-            <%
-                if (contenido.getDaños()== true) {
-                    siOno = "Sí";
-                } else {
-                    siOno = "No";
-                }
-            %>
-            <p>- Cubrir daños accidentales: <%=siOno%></p>
-            <p>- Cantidad que se quiere asegurar: ${contenido.cantidad}€</p>
-            <%
-                if (contenido.getFranquicia() == 0) {
-                    franquicia = "Ninguna";
-                } else {
-                    franquicia = Double.toString(Math.round(contenido.getFranquicia() *100.0/100.0)) + "€";
-                }
-            %>
-            <p>- Franquicia: ${contenido.franquicia}</p>
-            
-            <%
-                if (edificio != null) {
-            %>
-            <p><small>(Total del seguro del contenido: ${contenido.prima}€)</small></p>
-
-            <%
-                }
-            %>
-            
-            <br/>
-
-            <%
-                }
-            %>
-
-            <h2>El TOTAL de su seguro es de: ${edificio.prima+contenido.prima}€</h2>
-            <button id="botonMenu" type="submit" name="menu" value="Menu"><a id="enlaceMenu" href="<%=request.getContextPath()%>/index.jsp">Menú</a> </button>
+        <div class="principal">
+            <div class="float">
+                <h2>Detalles de su póliza</h2>
+                <c:if test="${not empty edificio}">
+                    <h3>Edificio</h3>
+                    <ul class="list-unstyled">
+                        <li>Tipo de edificio: ${edificio.tipo}</li>
+                        <li>Habitaciones: ${edificio.habitaciones}</li>
+                        <li>Fecha de construcción: ${edificio.fecha}</li>
+                        <li>Tipo de construcción: ${edificio.material}</li>
+                        <li>Valor de mercado: ${edificio.valor}</li>
+                        <li>Prima: <fmt:formatNumber type="currency" value="${edificio.prima}"/></li>
+                    </ul>
+                    <c:set var="primaed" value="true"/>
+                </c:if>
+            </div>
+            <c:if test="${not empty contenido}">
+            <div class="float">
+                <h3>Contenido</h3>
+                <c:if test="${not empty contenido.daños}">
+                    <p>Daños cubiertos:</p>
+                </c:if>
+                    <ul class="list-unstyled">
+                        <li>Cantidad: ${contenido.cantidad}</li>
+                        <li>Franquicia: ${contenido.franquicia}</li>        
+                        <li class="res">Prima: <fmt:formatNumber type="currency" value="${contenido.prima}"/></li>
+                    </ul>
+            </div>
+                <c:set var="primacon" value="true"/>
+            </c:if>          
+            <c:if test="${primaed && primacon}">
+                <div class="float">
+                    
+                </div>
+            </c:if>                    
         </div>
-        <%
-            sesion.invalidate();
-        %>
+        <h3 class="clear">El TOTAL de su seguro es de: <fmt:formatNumber type="currency" value="${edificio.prima+contenido.prima}"/></h3>
+        <button id="botonMenu" type="submit" name="menu" value="Menu"><a id="enlaceMenu" href="<c:url value = "../JSPLE/index.jsp" />">Menú</a> </button>
+        <%session.invalidate();%>
         <jsp:include page="../../INC/piePagina.inc"/>
-        ${sesion.invalidate()}
     </body>
 </html>

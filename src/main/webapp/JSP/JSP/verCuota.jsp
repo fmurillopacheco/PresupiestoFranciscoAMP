@@ -34,10 +34,10 @@
                     total = total + edificio.getPrima();
             %>
             <h1>Seguro de edificio</h1>
-            <%-- A TODAS VISTAS ESTO ES <ul><li>...</li></ul> --%>
-            <p>- Tipo de edificio: <%=edificio.getTipo()%></p>
-            <p>- Número de habitaciones: <%=edificio.getHabitaciones()%></p>
-            <p>- Fecha de construcción: <%=edificio.getFecha()%></p>
+            <ul class="list-unstyled">
+                <li>- Tipo de edificio: <%=edificio.getTipo()%></li>
+                <li>- Número de habitaciones: <%=edificio.getHabitaciones()%></li>
+                <li>- Fecha de construcción: <%=edificio.getFecha()%></li>    
             <%
                 if (edificio.getFecha().startsWith("mad")) {
                     mh = "Madera";
@@ -46,16 +46,17 @@
                 }
 
             %>
-            <p>- Tipo de construcción: <%=mh%></p>
-            <p>- Valor estimado del mercado: <%=edificio.getValor()%>€</p>
+                <li>- Tipo de construcción: <%=mh%></li>
+                <li>- Valor estimado del mercado: <%=edificio.getValor()%>€</li>
             <%
                 if (contenido != null) {
             %>
-            <p><small>(Total del seguro del edificio: <%=Math.round(edificio.getPrima() * 100.0) / 100.0%>€)</small></p>
+                <li><small>(Total del seguro del edificio: <%=Math.round(edificio.getPrima() * 100.0) / 100.0%>€)</small></li>
 
             <%
                 }
             %>
+            </ul>          
             <br/>
             <%
                 }
@@ -79,8 +80,9 @@
                     siOno = "No";
                 }
             %>
-            <p>- Cubrir daños accidentales: <%=siOno%></p>
-            <p>- Cantidad que se quiere asegurar: <%=contenido.getCantidad()%>€</p>
+            <ul class="list-unstyled">
+                <li>- Cubrir daños accidentales: <%=siOno%></li>
+                <li>- Cantidad que se quiere asegurar: <%=contenido.getCantidad()%>€</li>
             <%
                 if (contenido.getFranquicia() == 0) {
                     franquicia = "Ninguna";
@@ -88,17 +90,19 @@
                     franquicia = Double.toString(Math.round(contenido.getFranquicia() *100.0/100.0)) + "€";
                 }
             %>
-            <p>- Franquicia: <%=franquicia%></p>
+                <li>- Franquicia: <%=franquicia%></li>
             
             <%
                 if (edificio != null) {
             %>
-            <p><small>(Total del seguro del contenido: <%=Math.round(contenido.getPrima() * 100.0) / 100.0%>€)</small></p>
+                <li><small>(Total del seguro del contenido: <%=Math.round(contenido.getPrima() * 100.0) / 100.0%>€)</small></li>
 
             <%
                 }
             %>
-            
+    
+            </ul>
+        
             <br/>
 
             <%

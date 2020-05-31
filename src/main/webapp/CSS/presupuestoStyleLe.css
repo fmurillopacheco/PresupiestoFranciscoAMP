@@ -1,6 +1,6 @@
 
 /* 
-    Created on : 25-may-2020, 19:48:21
+    Created on : 31-may-2020, 19:47:55
     Author     : Francisco_Antonio
 */
 html{
@@ -108,4 +108,27 @@ tr{
 }
 #enlaceMenu:hover{
     color: #000;
+}
+
+
+.float{
+    float: left;
+    margin: 5%;
+}
+.clear{
+    clear: left;
+    margin-left: 20%;
+}
+.res{
+    font-weight: bolder;
+}
+.enl{
+    clear: both;
+}
+.contenido{
+    width: 100%;
+    overflow: hidden;
+}
+.cap{
+    text-transform: capitalize;
 }

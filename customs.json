@@ -1,6 +1,7 @@
 {
     "elements": {
-        "c:set": {}
+        "c:set": {},
+        "c:if": {}
     },
     "attributes": {}
 }
