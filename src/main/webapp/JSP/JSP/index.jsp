@@ -18,7 +18,7 @@
         <%@include file="../../INC/cabecera.inc" %>
         <div id="principal">
 
-            <form action="<%=request.getContextPath()%>/eleccion" method="post">
+            <form action="<%=request.getContextPath()%>/Eleccion" method="post">
                 <h1>Elija su seguro de confianza</h1>
                 <p>Por favor, elija que desea asegurar (marque uno sólo o los dos en las casillas)</p>
                 <br>

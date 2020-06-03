@@ -18,7 +18,7 @@
 
         <div id="principal">
 
-            <form action="../../edificio" method="post">
+            <form action="../../Edificio" method="post">
 
 
                 <h1>Detalle de la póliza de edificios</h1>

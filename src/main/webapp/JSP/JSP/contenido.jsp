@@ -18,7 +18,7 @@
         <div>
             <h2>Detalles de la póliza de contenidos</h2>
             <p>Proporcione infromación sobre su contenido en el formulario, y haga clic en Envíar</p>
-            <form action="../../contenido" method="post">
+            <form action="../../Contenido" method="post">
                 <p>
                     <label for="daños">Cubrir daños accidentales</label>
                     <input type="checkbox" name="dan" value="dan" id="daños" checked/>
